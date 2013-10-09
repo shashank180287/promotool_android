@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dip">
+  
+        <Button
+            android:id="@+id/inventory_button"
+            android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/inventory_box"
+            android:enabled="true"/>
+
+        <Button
+            android:id="@+id/requestplacing_button"
+            android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/request_intr"
+            android:enabled="true" />
+
+        <Button
+            android:id="@+id/settings_button"
+            android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:background="@drawable/settings"
+            android:contentDescription="change settings"
+            android:fadingEdge="horizontal" />
+   
+    </TableRow>  
+     
+    <TableRow 
+        android:id="@+id/tableRow1" 
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dip" >  
+        
+        <Button
+            android:id="@+id/info_button"
+            android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:background="@drawable/about"
+            android:contentDescription="know more about this app"
+            android:fadingEdge="horizontal" />
+       
+        <Button android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:visibility="invisible" />
+
+        <Button android:layout_width="25pt"
+            android:layout_height="25pt"
+            android:enabled="false" 
+            android:visibility="invisible" />
+    </TableRow> 
+
+</TableLayout>

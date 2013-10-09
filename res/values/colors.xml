@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="Black">#000000</color>
+	<color name="light_blue">#0000FA</color>
+	<color name="ExpandChildBackground">#FFAFABAB</color>
+	<color name="ExpandGroupBackground">#FF7C7C7C</color>
+</resources>

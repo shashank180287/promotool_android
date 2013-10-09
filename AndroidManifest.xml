@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mobile.promo.plugin"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        
+       <activity android:name="com.mobile.promo.plugin.activity.PromoToolHome" android:label="@string/movielist_header" android:icon="@drawable/icon">
+       		<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+		<activity android:name="com.mobile.promo.plugin.PromoListActivity" android:label="@string/movielist_header" android:icon="@drawable/icon">
+       		 <meta-data android:name="android.app.default_searchable" android:value=".SearchableActivity" />
+        </activity>
+
+		<activity android:name="com.mobile.promo.plugin.PromoExpandableListActivity" android:label="@string/movielist_header" android:icon="@drawable/icon">
+       		<!--intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter-->
+        </activity>
+        
+		<activity android:name="com.mobile.promo.plugin.activity.ApplicationIntro" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.activity.SettingsPage" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.activity.RequestRegisterInterface" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.activity.InventorySystem" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.ServiceInfoActivity" android:label="@string/app_name"></activity>
+		
+        <activity android:name="com.mobile.promo.plugin.PromoInfosActivity" android:label="@string/app_name"></activity>
+		
+        <activity android:name="com.mobile.promo.plugin.alerts.InternetConnectionAlert" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.alerts.LocationSyncAlert" android:label="@string/app_name"></activity>
+		
+		<activity android:name="com.mobile.promo.plugin.SearchableActivity" android:label="@string/searchlist_header" android:icon="@drawable/icon">
+        	<intent-filter>
+            	<action android:name="android.intent.action.SEARCH" />
+	        </intent-filter>
+        	<meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+    	</activity>
+    	
+		<receiver android:name="com.mobile.promo.plugin.widget.PromosSearchProvider" >
+            <intent-filter>
+                <action android:name="com.mobile.promo.plugin.PROMO_SEARCH_WIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+        
+    </application>
+
+</manifest>

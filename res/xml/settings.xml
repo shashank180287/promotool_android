@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory 
+        android:title="First Category"
+        android:key="user_preference">
+    <PreferenceScreen
+            android:key="category_setting_key"
+            android:title="Category"
+            android:persistent="false">
+   
+    </PreferenceScreen>
+
+        
+   
+            
+    </PreferenceCategory>
+   
+</PreferenceScreen>
