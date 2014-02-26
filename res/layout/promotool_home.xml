@@ -22,7 +22,7 @@
             android:layout_width="25pt"
             android:layout_height="25pt"
             android:layout_marginRight="10dp"
-            android:background="@drawable/request_intr"
+            android:background="@drawable/place_request"
             android:enabled="true" />
 
         <Button

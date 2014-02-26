@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.mobile.promo.plugin.R;
 import com.mobile.promo.plugin.alerts.InternetConnectionAlert;
+import com.mobile.promo.plugin.tabpanel.PluginTabHostProvider;
+import com.mobile.promo.plugin.tabpanel.TabView;
 import com.mobile.promo.plugin.utils.Constants;
 import com.mobile.promo.plugin.utils.NetworkUtil;
 
@@ -34,26 +36,30 @@ public class RequestRegisterInterface extends Activity implements Constants{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		PluginTabHostProvider tabProvider = new PluginTabHostProvider(RequestRegisterInterface.this);
+		TabView tabView = tabProvider.getTabHost("Request");
+		tabView.setCurrentView(R.layout.requesting_interf);
+		setContentView(tabView.render(2));
 		context = this;
-		setContentView(R.layout.requesting_interf);
+//		setContentView(R.layout.requesting_interf);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d(LOG_TAG, "Checking internet connection....");
-        int status = NetworkUtil.getConnectivityStatus(context);
-        if(status!= NetworkUtil.TYPE_NOT_CONNECTED){
-        	Log.d(LOG_TAG, "Internet connection is present....");
+//		Log.d(LOG_TAG, "Checking internet connection....");
+//        int status = NetworkUtil.getConnectivityStatus(context);
+//        if(status!= NetworkUtil.TYPE_NOT_CONNECTED){
+//        	Log.d(LOG_TAG, "Internet connection is present....");
     		addItemsOnRequestCategories();
     		addItemsOnRequestType();
-        }else{
-        	Log.d(LOG_TAG, "Internet connection is not present..");
-			Intent internetConnectionActivity = new Intent(context, InternetConnectionAlert.class);
-			internetConnectionActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(internetConnectionActivity);
-			this.finish();
-        }
+//        }else{
+//        	Log.d(LOG_TAG, "Internet connection is not present..");
+//			Intent internetConnectionActivity = new Intent(context, InternetConnectionAlert.class);
+//			internetConnectionActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//			context.startActivity(internetConnectionActivity);
+//			this.finish();
+//        }
 	};
 	
 	private void addItemsOnRequestType() {
