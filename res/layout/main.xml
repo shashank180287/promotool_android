@@ -10,7 +10,7 @@
         android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/app_header"
+        android:src="@drawable/shop_here"
         android:contentDescription="@string/app_name"/>
     <TextView
         android:layout_width="fill_parent"

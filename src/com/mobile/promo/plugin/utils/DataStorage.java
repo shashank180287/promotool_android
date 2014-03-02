@@ -18,7 +18,16 @@ public class DataStorage implements Constants{
 	private static JSONArray jsonArray;
 	private static int selectedMovieIndex;
 	private static boolean isLiveData;
+	private static byte[] dealOfTheDayBytes;
 	
+	public static byte[] getDealOfTheDayBytes() {
+		return dealOfTheDayBytes;
+	}
+
+	public static void setDealOfTheDayBytes(byte[] dealOfTheDayBytes) {
+		DataStorage.dealOfTheDayBytes = dealOfTheDayBytes;
+	}
+
 	public static Location getUserCurrentLocation() {
 		return userCurrentLocation;
 	}

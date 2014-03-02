@@ -8,9 +8,10 @@ public interface Constants {
 	
 	public static final String PROMO_TOOL_WIDGET_RECEIVER="com.mobile.promo.plugin.PROMO_SEARCH_WIDGET_UPDATE";
 	
-	public static final String SERVER_BASE_URL = "http://10.0.2.2:8080/plugin";//"http://localhost:8080/promopulgin/services";
+	public static final String SERVER_BASE_URL ="http://1-dot-promotooldummy.appspot.com/";// "http://10.0.2.2:8080/plugin";//"http://localhost:8080/promopulgin/services";
 	public static final String SERVICE_TYPE_URL_EXT = "service";
 	public static final String SUB_CATEGORY_URL_EXT = "subcategory";
+	public static final String APP_LOAD_URL_EXT = "loaddata";
 	public static final String INVENTORY_URL_EXT = "inventory";
 	public static final String SEARCH_ITEM_CONTEXT = "search";
 	public static final String INVENTORY_SEARCH_REQ_PARAM_CAT = "categoryName";

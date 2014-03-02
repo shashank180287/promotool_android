@@ -10,7 +10,7 @@
  
     <ImageView
         android:id="@+id/header"
-        android:src="@drawable/app_header"
+        android:src="@drawable/shop_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

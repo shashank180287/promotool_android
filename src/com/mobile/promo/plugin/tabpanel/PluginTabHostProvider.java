@@ -50,8 +50,6 @@ public class PluginTabHostProvider extends TabHostProvider
 		dealOfTheDayTab.setBtnText("Best Deal");
 		dealOfTheDayTab.setBtnTextColor(Color.WHITE);
 		dealOfTheDayTab.setSelectedBtnTextColor(Color.BLACK);
-//		homeTab.setBtnColor(Color.parseColor("#00000000"));
-//		homeTab.setSelectedBtnColor(Color.parseColor("#0000FF"));
 		dealOfTheDayTab.setBtnGradient(transGradientDrawable);
 		dealOfTheDayTab.setSelectedBtnGradient(gradientDrawable);
 		dealOfTheDayTab.setIntent(new Intent(context, DealOfTheDayActivity.class));
@@ -62,8 +60,6 @@ public class PluginTabHostProvider extends TabHostProvider
 		inventoryTab.setBtnText("Search");
 		inventoryTab.setBtnTextColor(Color.WHITE);
 		inventoryTab.setSelectedBtnTextColor(Color.BLACK);
-//		contactTab.setBtnColor(Color.parseColor("#00000000"));
-//		contactTab.setSelectedBtnColor(Color.parseColor("#0000FF"));
 		inventoryTab.setBtnGradient(transGradientDrawable);
 		inventoryTab.setSelectedBtnGradient(gradientDrawable);
 		inventoryTab.setIntent(new Intent(context, InventorySearchSystem.class));
@@ -74,8 +70,6 @@ public class PluginTabHostProvider extends TabHostProvider
 		registerRequestTab.setBtnText("Request");
 		registerRequestTab.setBtnTextColor(Color.WHITE);
 		registerRequestTab.setSelectedBtnTextColor(Color.BLACK);
-//		shareTab.setBtnColor(Color.parseColor("#00000000"));
-//		shareTab.setSelectedBtnColor(Color.parseColor("#0000FF"));
 		registerRequestTab.setBtnGradient(transGradientDrawable);
 		registerRequestTab.setSelectedBtnGradient(gradientDrawable);
 		registerRequestTab.setIntent(new Intent(context, RequestRegisterInterface.class));
@@ -86,8 +80,6 @@ public class PluginTabHostProvider extends TabHostProvider
 		appIntroTab.setBtnText("About Us");
 		appIntroTab.setBtnTextColor(Color.WHITE);
 		appIntroTab.setSelectedBtnTextColor(Color.BLACK);
-//		moreTab.setBtnColor(Color.parseColor("#00000000"));
-//		moreTab.setSelectedBtnColor(Color.parseColor("#0000FF"));
 		appIntroTab.setBtnGradient(transGradientDrawable);
 		appIntroTab.setSelectedBtnGradient(gradientDrawable);
 		appIntroTab.setIntent(new Intent(context, ApplicationIntro.class));
