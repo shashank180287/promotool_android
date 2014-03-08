@@ -1,4 +1,4 @@
-package com.mobile.promo.plugin;
+package com.mobile.promo.common.activity;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,8 @@ import android.widget.ExpandableListView;
 
 import com.mobile.promo.model.ExpandListChild;
 import com.mobile.promo.model.ExpandListGroup;
-import com.mobile.promo.plugin.list.ExpandListAdapter;
+import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.adapter.ExpandListAdapter;
 
 public class PromoExpandableListActivity extends Activity {
 
