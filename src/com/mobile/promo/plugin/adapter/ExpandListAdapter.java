@@ -1,4 +1,4 @@
-package com.mobile.promo.plugin.list;
+package com.mobile.promo.plugin.adapter;
 
 import java.util.ArrayList;
 

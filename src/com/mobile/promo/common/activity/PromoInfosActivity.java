@@ -1,4 +1,4 @@
-package com.mobile.promo.plugin;
+package com.mobile.promo.common.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -11,9 +11,10 @@ import android.widget.TableLayout.LayoutParams;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.data.DataStorage;
 import com.mobile.promo.plugin.json.JSONException;
 import com.mobile.promo.plugin.json.JSONObject;
-import com.mobile.promo.plugin.utils.DataStorage;
 
 public class PromoInfosActivity extends Activity implements OnClickListener {
 

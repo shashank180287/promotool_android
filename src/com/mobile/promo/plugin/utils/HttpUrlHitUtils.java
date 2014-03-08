@@ -10,7 +10,7 @@ import java.util.Map;
 
 import android.util.Log;
 
-public class HttpUrlHitter implements Constants{
+public class HttpUrlHitUtils implements Constants{
 	
 	public static String getResponseByHittingUrl(String url) {
 		try {

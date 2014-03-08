@@ -7,7 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-public class Utility implements Constants{
+public class ToolWidgetUtils implements Constants{
 
 	public static void startWidgetUpdateAlarmManager(Context context) {
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

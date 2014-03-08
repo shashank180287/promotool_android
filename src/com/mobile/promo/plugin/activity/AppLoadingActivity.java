@@ -11,31 +11,23 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.data.DataStorage;
 import com.mobile.promo.plugin.json.JSONObject;
 import com.mobile.promo.plugin.listener.OnlineImageDownloader;
 import com.mobile.promo.plugin.listener.RemoteServerAsyncCaller;
 import com.mobile.promo.plugin.listener.RemoteServerAsyncCaller.HttpMethods;
 import com.mobile.promo.plugin.listener.RemoteServerInvoker;
-import com.mobile.promo.plugin.utils.DataStorage;
 
 public class AppLoadingActivity extends Activity {
 
+	private final String APP_LOAD_RESP_KEY_DOD = "dod";
+	private final String APP_LOAD_RESP_KEY_SERV_TYPE = "serviceTypes";
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_loading);
-
-		// final Handler handler = new Handler();
-		//
-		// handler.postDelayed(new Runnable() {
-		// public void run() {
-		// Intent mInHome = new Intent(AppLoadingActivity.this,
-		// DealOfTheDayActivity.class);
-		// AppLoadingActivity.this.startActivity(mInHome);
-		// AppLoadingActivity.this.finish();
-		// }
-		// }, 5000);
 
 		new RemoteServerAsyncCaller(new RemoteServerInvoker<String>() {
 
@@ -43,6 +35,7 @@ public class AppLoadingActivity extends Activity {
 			public void executeResponse(String response, Object... extras) {
 				try {
 						JSONObject json = new JSONObject(response);
+						DataStorage.setServiceTypes(json.getJSONArray(APP_LOAD_RESP_KEY_SERV_TYPE));
 						new OnlineImageDownloader(new RemoteServerInvoker<Bitmap>() {
 
 							@Override
@@ -61,13 +54,13 @@ public class AppLoadingActivity extends Activity {
 								AppLoadingActivity.this.finish();
 
 							}
-						}).execute(json.getString("dod"));
+						}).execute(json.getString(APP_LOAD_RESP_KEY_DOD));
 					} catch (Exception e) {
 
 					}
 
 			}
-		}).execute(SERVER_BASE_URL + APP_LOAD_URL_EXT,  HttpMethods.GET.name());
+		}).execute(SERVER_BASE_URL +"/"+ APP_LOAD_URL_EXT,  HttpMethods.GET.name());
 	}
 
 }

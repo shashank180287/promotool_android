@@ -68,10 +68,10 @@ public class LocationSyncUtils implements Constants, LocationListener {
 		Log.d(Constants.LOG_TAG, "onProviderEnabled");
 		Log.d(LOG_TAG, "Received alerts for location provider enabled");
 		int isLocationProviderPresent = LocationSyncUtils.getLocationSyncStatus(context);
-		int isInternetConnectionPresent = NetworkUtil.getConnectivityStatus(context);
-		if(isLocationProviderPresent!=LocationSyncUtils.TYPE_NOT_AVAILABLE && isInternetConnectionPresent!= NetworkUtil.TYPE_NOT_CONNECTED){
-			if(!Utility.isWidgetUpdateAlarmManagerStarted(context))
-				Utility.startWidgetUpdateAlarmManager(context);
+		int isInternetConnectionPresent = NetworkUtils.getConnectivityStatus(context);
+		if(isLocationProviderPresent!=LocationSyncUtils.TYPE_NOT_AVAILABLE && isInternetConnectionPresent!= NetworkUtils.TYPE_NOT_CONNECTED){
+			if(!ToolWidgetUtils.isWidgetUpdateAlarmManagerStarted(context))
+				ToolWidgetUtils.startWidgetUpdateAlarmManager(context);
 		}
 	}
 
@@ -79,8 +79,8 @@ public class LocationSyncUtils implements Constants, LocationListener {
 	public void onProviderDisabled(String provider) {
 		Log.d(Constants.LOG_TAG, "onProviderDisabled");
 		Log.d(LOG_TAG, "Received alerts for location provider disabled");
-		if(Utility.isWidgetUpdateAlarmManagerStarted(context))
-			Utility.stopWidgetUpdateAlarmManager(context);
+		if(ToolWidgetUtils.isWidgetUpdateAlarmManagerStarted(context))
+			ToolWidgetUtils.stopWidgetUpdateAlarmManager(context);
 	}
 
 	@Override

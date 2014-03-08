@@ -3,25 +3,25 @@ package com.mobile.promo.plugin.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.promo.plugin.R;
-import com.mobile.promo.plugin.alerts.InternetConnectionAlert;
-import com.mobile.promo.plugin.tabpanel.PluginTabHostProvider;
-import com.mobile.promo.plugin.tabpanel.TabView;
-import com.mobile.promo.plugin.utils.Constants;
-import com.mobile.promo.plugin.utils.NetworkUtil;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.AdapterView.OnItemSelectedListener;
+
+import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.data.DataStorage;
+import com.mobile.promo.plugin.json.JSONArray;
+import com.mobile.promo.plugin.json.JSONException;
+import com.mobile.promo.plugin.tabpanel.PluginTabHostProvider;
+import com.mobile.promo.plugin.tabpanel.TabView;
+import com.mobile.promo.plugin.utils.Constants;
 
 public class RequestRegisterInterface extends Activity implements Constants{
 
@@ -33,6 +33,7 @@ public class RequestRegisterInterface extends Activity implements Constants{
 	private Button reqSubmitButton;
 	private Context context;
 	
+	private final String SERVICE_TYPES_RESP_KEY_NAME = "name";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,26 +42,8 @@ public class RequestRegisterInterface extends Activity implements Constants{
 		tabView.setCurrentView(R.layout.requesting_interf);
 		setContentView(tabView.render(2));
 		context = this;
-//		setContentView(R.layout.requesting_interf);
+		addItemsOnRequestCategories();
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-//		Log.d(LOG_TAG, "Checking internet connection....");
-//        int status = NetworkUtil.getConnectivityStatus(context);
-//        if(status!= NetworkUtil.TYPE_NOT_CONNECTED){
-//        	Log.d(LOG_TAG, "Internet connection is present....");
-    		addItemsOnRequestCategories();
-    		addItemsOnRequestType();
-//        }else{
-//        	Log.d(LOG_TAG, "Internet connection is not present..");
-//			Intent internetConnectionActivity = new Intent(context, InternetConnectionAlert.class);
-//			internetConnectionActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//			context.startActivity(internetConnectionActivity);
-//			this.finish();
-//        }
-	};
 	
 	private void addItemsOnRequestType() {
 		List<String> list = new ArrayList<String>();
@@ -137,13 +120,22 @@ public class RequestRegisterInterface extends Activity implements Constants{
 		reqSubTypeSpinner = (Spinner) findViewById(R.id.subreqtype);
 		userInputText = (EditText) findViewById(R.id.userinput);
 		reqSubmitButton = (Button) findViewById(R.id.btnReqSubmit);
-		List<String> list = new ArrayList<String>();
-		list.add("Appreal");
-		list.add("Grossary");
-		list.add("Other");
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		reqCategoriesSpinner.setAdapter(dataAdapter);
+		JSONArray serviceTypesArray = DataStorage.getServiceTypes();
+		if(serviceTypesArray!=null){
+			try{
+				List<String> serviceTypeNameList = new ArrayList<String>();
+				for (int i = 0; i < serviceTypesArray.length(); i++) {
+					if(i==0)
+						serviceTypeNameList.add("Select One...");
+					serviceTypeNameList.add(serviceTypesArray.getJSONObject(i).getString(SERVICE_TYPES_RESP_KEY_NAME));
+				}
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, serviceTypeNameList);
+			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			reqCategoriesSpinner.setAdapter(dataAdapter);
+			}catch (JSONException e) {
+				Log.e(LOG_TAG, "exception occur while parsing object "+e.getMessage());
+			}
+		}
 		addListenerOnSpinnerItemSelection();
 		reqSubCategoriesSpinner.setEnabled(false);
 		reqTypeSpinner.setEnabled(false);
@@ -196,6 +188,7 @@ public class RequestRegisterInterface extends Activity implements Constants{
 					int position, long id) {
 				String selectedSubCategory =parent.getItemAtPosition(position).toString();
 				Log.d(LOG_TAG, "Selected sub category as :"+selectedSubCategory);
+				addItemsOnRequestType() ;
 				reqTypeSpinner.setEnabled(true);
 			}
 

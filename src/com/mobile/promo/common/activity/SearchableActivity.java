@@ -1,4 +1,4 @@
-package com.mobile.promo.plugin;
+package com.mobile.promo.common.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.adapter.PromosListAdapter;
+import com.mobile.promo.plugin.data.DataStorage;
 import com.mobile.promo.plugin.json.JSONArray;
 import com.mobile.promo.plugin.json.JSONException;
 import com.mobile.promo.plugin.json.JSONObject;
-import com.mobile.promo.plugin.list.PromosListAdapter;
 import com.mobile.promo.plugin.utils.Constants;
-import com.mobile.promo.plugin.utils.DataStorage;
 
 
 public class SearchableActivity extends ListActivity implements Constants{
@@ -40,7 +41,8 @@ public class SearchableActivity extends ListActivity implements Constants{
 	    	}
 	    	setContentView(R.layout.list_layout);
 //	    	setListAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1, movieNameList));
-	    	setListAdapter(new PromosListAdapter(this,movieNameList));
+//	    	setListAdapter(new PromosListAdapter(this,movieNameList));
+	    	setListAdapter(new PromosListAdapter(this, movieListAsJsonArray, true));
 	    }
 	}
 	

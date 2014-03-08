@@ -8,7 +8,7 @@
  
     <!-- Title Of Song-->
     <TextView
-        android:id="@+id/movie_name"
+        android:id="@+id/main_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty"
@@ -19,10 +19,10 @@
  
     <!-- Artist Name -->
     <TextView
-        android:id="@+id/theater_name"
+        android:id="@+id/sub_head"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/movie_name"
+        android:layout_below="@id/main_head"
         android:textColor="#343434"
         android:textSize="10dip"
         android:layout_marginTop="1dip"
@@ -30,11 +30,11 @@
  
     <!-- Rightend Duration -->
     <TextView
-        android:id="@+id/movie_timings"
+        android:id="@+id/other_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/movie_name"
+        android:layout_alignTop="@id/main_head"
         android:gravity="right"
         android:text="@string/empty"
         android:layout_marginRight="5dip"
@@ -43,7 +43,9 @@
         android:textStyle="bold"/>
  
      <!-- Rightend Arrow -->
-     <ImageView android:layout_width="wrap_content"
+     <ImageView 
+         android:id="@+id/next_nav"
+         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/arrow"
         android:layout_alignParentRight="true"

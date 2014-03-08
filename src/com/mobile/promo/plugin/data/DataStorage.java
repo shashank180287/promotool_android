@@ -1,9 +1,8 @@
-package com.mobile.promo.plugin.utils;
+package com.mobile.promo.plugin.data;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 
 import android.location.Location;
 import android.util.Log;
@@ -11,6 +10,8 @@ import android.util.Log;
 import com.mobile.promo.plugin.json.JSONArray;
 import com.mobile.promo.plugin.json.JSONException;
 import com.mobile.promo.plugin.json.JSONObject;
+import com.mobile.promo.plugin.utils.Constants;
+import com.mobile.promo.plugin.utils.HttpUrlHitUtils;
 
 public class DataStorage implements Constants{
 
@@ -18,8 +19,27 @@ public class DataStorage implements Constants{
 	private static JSONArray jsonArray;
 	private static int selectedMovieIndex;
 	private static boolean isLiveData;
-	private static byte[] dealOfTheDayBytes;
 	
+	private static byte[] dealOfTheDayBytes;
+	private static JSONArray serviceTypes;
+	private static JSONArray itemsList;
+	
+	public static JSONArray getItemsList() {
+		return itemsList;
+	}
+
+	public static void setItemsList(JSONArray itemsList) {
+		DataStorage.itemsList = itemsList;
+	}
+
+	public static JSONArray getServiceTypes() {
+		return serviceTypes;
+	}
+
+	public static void setServiceTypes(JSONArray serviceTypes) {
+		DataStorage.serviceTypes = serviceTypes;
+	}
+
 	public static byte[] getDealOfTheDayBytes() {
 		return dealOfTheDayBytes;
 	}
@@ -47,7 +67,7 @@ public class DataStorage implements Constants{
 		requestParams.put("id", APPLICATION_USER_ID);
 		requestParams.put("lat", latitide+"");
 		requestParams.put("lon", longitude+"");
-		String response = HttpUrlHitter.postResponseByHittingUrl(movieSearchUrl, requestParams);
+		String response = HttpUrlHitUtils.postResponseByHittingUrl(movieSearchUrl, requestParams);
 		if(response!=null){
 			try{
 				JSONArray tempArray = new JSONArray(response);

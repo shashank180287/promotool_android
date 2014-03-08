@@ -10,15 +10,15 @@ import android.location.Location;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.mobile.promo.plugin.PromoListActivity;
+import com.mobile.promo.common.activity.PromoListActivity;
 import com.mobile.promo.plugin.R;
 import com.mobile.promo.plugin.alerts.InternetConnectionAlert;
 import com.mobile.promo.plugin.alerts.LocationSyncAlert;
+import com.mobile.promo.plugin.data.DataStorage;
 import com.mobile.promo.plugin.utils.Constants;
-import com.mobile.promo.plugin.utils.DataStorage;
 import com.mobile.promo.plugin.utils.LocationSyncUtils;
-import com.mobile.promo.plugin.utils.NetworkUtil;
-import com.mobile.promo.plugin.utils.Utility;
+import com.mobile.promo.plugin.utils.NetworkUtils;
+import com.mobile.promo.plugin.utils.ToolWidgetUtils;
 
 public class PromosSearchProvider extends AppWidgetProvider implements Constants{
 	
@@ -29,14 +29,14 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
     	super.onEnabled(context);
     	locationSyncUtils = LocationSyncUtils.getInstance(context);
 		Log.d(LOG_TAG, "Checking internet connection....");
-        int status = NetworkUtil.getConnectivityStatus(context);
+        int status = NetworkUtils.getConnectivityStatus(context);
 //      Toast.makeText(context, status, Toast.LENGTH_LONG).show();
-        if(status!= NetworkUtil.TYPE_NOT_CONNECTED){
+        if(status!= NetworkUtils.TYPE_NOT_CONNECTED){
         	Log.d(LOG_TAG, "Internet connection is present now checking gps connection....");
         	int gpsStatus = LocationSyncUtils.getLocationSyncStatus(context);
         	if(gpsStatus!=LocationSyncUtils.TYPE_NOT_AVAILABLE){
     			Log.d(LOG_TAG,"Location manager is enabled...Starting timer to update widget");
-    			Utility.startWidgetUpdateAlarmManager(context);
+    			ToolWidgetUtils.startWidgetUpdateAlarmManager(context);
         	}else{
             	Log.d(LOG_TAG, "no location provider present..");
     			Intent locationSyncActivity = new Intent(context, LocationSyncAlert.class);
@@ -55,7 +55,7 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
 	public void onDisabled(Context context) {
 		super.onDisabled(context);
 		Log.d(LOG_TAG, "Widget Provider disabled. Turning off timer");
-		Utility.stopWidgetUpdateAlarmManager(context);
+		ToolWidgetUtils.stopWidgetUpdateAlarmManager(context);
 	}
 	
 	@Override
@@ -75,13 +75,13 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
             //android.net.wifi.WIFI_STATE_CHANGED
 			Log.d(LOG_TAG, "Received alerts for connectivity change");
 			int isLocationProviderPresent = LocationSyncUtils.getLocationSyncStatus(context);
-			int isInternetConnectionPresent = NetworkUtil.getConnectivityStatus(context);
-			if(isLocationProviderPresent!=LocationSyncUtils.TYPE_NOT_AVAILABLE && isInternetConnectionPresent!= NetworkUtil.TYPE_NOT_CONNECTED){
-				if(!Utility.isWidgetUpdateAlarmManagerStarted(context))
-					Utility.startWidgetUpdateAlarmManager(context);
+			int isInternetConnectionPresent = NetworkUtils.getConnectivityStatus(context);
+			if(isLocationProviderPresent!=LocationSyncUtils.TYPE_NOT_AVAILABLE && isInternetConnectionPresent!= NetworkUtils.TYPE_NOT_CONNECTED){
+				if(!ToolWidgetUtils.isWidgetUpdateAlarmManagerStarted(context))
+					ToolWidgetUtils.startWidgetUpdateAlarmManager(context);
 			}else{
-				if(Utility.isWidgetUpdateAlarmManagerStarted(context))
-					Utility.stopWidgetUpdateAlarmManager(context);
+				if(ToolWidgetUtils.isWidgetUpdateAlarmManagerStarted(context))
+					ToolWidgetUtils.stopWidgetUpdateAlarmManager(context);
 			}
 		}else{
 			// for android.appwidget.action.APPWIDGET_UPDATE

@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.data.DataStorage;
 import com.mobile.promo.plugin.tabpanel.PluginTabHostProvider;
 import com.mobile.promo.plugin.tabpanel.TabView;
-import com.mobile.promo.plugin.utils.DataStorage;
 
 public class DealOfTheDayActivity extends Activity {
 
