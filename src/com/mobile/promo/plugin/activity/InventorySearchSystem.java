@@ -2,11 +2,15 @@ package com.mobile.promo.plugin.activity;
 
 import static com.mobile.promo.plugin.utils.Constants.INVENTORY_SEARCH_REQ_PARAM_CAT;
 import static com.mobile.promo.plugin.utils.Constants.INVENTORY_SEARCH_REQ_PARAM_SUBCAT;
+import static com.mobile.promo.plugin.utils.Constants.SUB_CATEGORY_RESP_KEY_SUBCAT;
+import static com.mobile.promo.plugin.utils.Constants.SUB_CATEGORY_RESP_KEY_SUBCAT_NAME;
 import static com.mobile.promo.plugin.utils.Constants.INVENTORY_URL_EXT;
 import static com.mobile.promo.plugin.utils.Constants.LOG_TAG;
 import static com.mobile.promo.plugin.utils.Constants.SEARCH_ITEM_CONTEXT;
 import static com.mobile.promo.plugin.utils.Constants.SERVER_BASE_URL;
 import static com.mobile.promo.plugin.utils.Constants.SUB_CATEGORY_URL_EXT;
+import static com.mobile.promo.plugin.utils.Constants.SERVICE_TYPES_RESP_KEY_NAME;
+import static com.mobile.promo.plugin.utils.Constants.SERVICE_TYPES_RESP_KEY_CODE;
 import static com.mobile.promo.plugin.utils.WordUtils.capatalize;
 
 import java.util.ArrayList;
@@ -42,10 +46,6 @@ public class InventorySearchSystem extends Activity {
 	private Button searchButton;
 	private Context context;
 	
-	private final String SERVICE_TYPES_RESP_KEY_NAME = "name";
-	private final String SERVICE_TYPES_RESP_KEY_CODE = "code";
-	private final String SUB_CATEGORY_RESP_KEY_SUBCAT ="subCategoryModels";
-	private final String SUB_CATEGORY_RESP_KEY_SUBCAT_NAME = "name";
 	private final String ITEM_SEARCH_RESP_KEY_ITEMS = "inventorySearchItems";
 	
 	@Override
