@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
   <PreferenceCategory 
-        android:title="First Category"
+        android:title="Settings"
         android:key="user_preference">
     <PreferenceScreen
             android:key="category_setting_key"

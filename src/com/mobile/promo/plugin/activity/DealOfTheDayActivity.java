@@ -1,9 +1,13 @@
 package com.mobile.promo.plugin.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.mobile.promo.plugin.R;
@@ -28,6 +32,25 @@ public class DealOfTheDayActivity extends Activity {
 			image = (ImageView) findViewById(R.id.bestDeal);
 			image.setImageBitmap(bmp);
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.common_menu , menu);
+        return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+	        case R.id.menu_settings:{
+	        	Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+	        	startActivity(intent);
+	            return true;
+	        }
+        }
+        return super.onOptionsItemSelected(item);
 	}
 	
 }

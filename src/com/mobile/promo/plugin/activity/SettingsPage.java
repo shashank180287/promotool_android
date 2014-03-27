@@ -1,13 +1,16 @@
 package com.mobile.promo.plugin.activity;
 
+import java.util.Map;
+
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.mobile.promo.plugin.R;
+import com.mobile.promo.plugin.data.DataStorage;
+import com.mobile.promo.plugin.utils.WordUtils;
 
 public class SettingsPage extends PreferenceActivity {
     
@@ -17,30 +20,19 @@ public class SettingsPage extends PreferenceActivity {
         addPreferencesFromResource(R.xml.settings);   
         
         PreferenceScreen screen = (PreferenceScreen) findPreference("category_setting_key");
-        
-        CheckBoxPreference glossaryCheckBoxPreference = new CheckBoxPreference(this);
-        glossaryCheckBoxPreference.setTitle("Glossary");
-        screen.addPreference(glossaryCheckBoxPreference);
-        
-        CheckBoxPreference apprealCheckBoxPreference = new CheckBoxPreference(this);
-        apprealCheckBoxPreference.setTitle("Appreal");
-        screen.addPreference(apprealCheckBoxPreference);
+        Map<String, Boolean> serviceTypeStatus = DataStorage.getServiceTypeSettings();
+        if(serviceTypeStatus!=null && serviceTypeStatus.keySet().size()>0){
+        	for (String serviceType : serviceTypeStatus.keySet()) {
+                CheckBoxPreference glossaryCheckBoxPreference = new CheckBoxPreference(this);
+                glossaryCheckBoxPreference.setTitle(WordUtils.capatalize(serviceType));
+                glossaryCheckBoxPreference.setChecked(serviceTypeStatus.get(serviceType));
+                screen.addPreference(glossaryCheckBoxPreference);
+			}
+        }else{
+        	Toast.makeText(this , "Some error occured. Please try after some time.", Toast.LENGTH_LONG).show();
+			finish();
+        }
         
     }
     
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 0, 0, "Show current settings");
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case 0:
- //               startActivity(new Intent(this, ShowSettingsActivity.class));
-                return true;
-        }
-        return false;
-    }
 }

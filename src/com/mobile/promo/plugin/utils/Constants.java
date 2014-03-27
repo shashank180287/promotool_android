@@ -19,7 +19,10 @@ public interface Constants {
 	public static final String INVENTORY_SEARCH_REQ_PARAM_CAT = "service-type";
 	public static final String REQUEST_SUBMIT_URL_EXT = "requestintr";
 	public static final String INVENTORY_SEARCH_REQ_PARAM_SUBCAT = "sub-category";
-	
+	public static final String STATUS_TRACKER_URL = "tracker/status";	
+	public static final String STATUS_TRACKER_REQ_PARAM_ID = "id";	
+	public static final String STATUS_TRACKER_REQ_PARAM_LAT = "lat";	
+	public static final String STATUS_TRACKER_REQ_PARAM_LONG = "lon";	
 	
 	public static final String SERVICE_TYPES_RESP_KEY_NAME = "name";
 	public static final String SERVICE_TYPES_RESP_KEY_CODE = "code";

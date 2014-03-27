@@ -21,6 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -181,5 +184,24 @@ public class InventorySearchSystem extends Activity {
 				}
 			}
 		}); 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.common_menu , menu);
+        return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+	        case R.id.menu_settings:{
+	        	Intent intent = new Intent(getApplicationContext(), SettingsPage.class);
+	        	startActivity(intent);
+	            return true;
+	        }
+        }
+        return super.onOptionsItemSelected(item);
 	}
 }
