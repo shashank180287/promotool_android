@@ -23,6 +23,8 @@ public interface Constants {
 	public static final String STATUS_TRACKER_REQ_PARAM_ID = "id";	
 	public static final String STATUS_TRACKER_REQ_PARAM_LAT = "lat";	
 	public static final String STATUS_TRACKER_REQ_PARAM_LONG = "lon";	
+	public static final String USER_DETAIL_REQ_URL_EXT = "userdetails";
+	public static final String SETTINGS_REQ_URL_EXT = "settings";
 	
 	public static final String SERVICE_TYPES_RESP_KEY_NAME = "name";
 	public static final String SERVICE_TYPES_RESP_KEY_CODE = "code";
@@ -39,7 +41,10 @@ public interface Constants {
 	public static final String REQUEST_TYPE_SUBMIT_REQ_KEY_REQTYPE = "reqTypeName";
 	public static final String REQUEST_TYPE_SUBMIT_REQ_KEY_CTX = "ctx";
 	public static final String REQUEST_TYPE_SUBMIT_REQ_KEY_SUBCTX = "subCtx";
-	
+	public static final String SETTINGS_UPDATE_REQ_BODY_USERID = "userId";
+	public static final String SETTINGS_UPDATE_REQ_BODY_SELECTEDSERVICE = "userSelectedServiceTypes";
+	public static final String SETTINGS_UPDATE_RES_STATUS = "status";
+	public static final String SETTINGS_UPDATE_RES_STATUS_SUCCESS = "SUCCESS";
 	
 	public static final String APPLICATION_USER_ID = "1";
 	public static final String USER_VISIT_CODE="VI";

@@ -23,7 +23,7 @@ public class DataStorage implements Constants{
 	private static byte[] dealOfTheDayBytes;
 	private static JSONArray serviceTypes;
 	private static JSONArray itemsList;
-	private static Map<String, Boolean> serviceTypeSettings=new HashMap<String, Boolean>();
+	private static Map<String, Boolean> serviceTypeSettings;
 	
 	public static JSONArray getItemsList() {
 		return itemsList;
@@ -141,9 +141,32 @@ public class DataStorage implements Constants{
 	}
 
 	public static Map<String, Boolean> getServiceTypeSettings() {
+		if(serviceTypeSettings==null){
+			serviceTypeSettings = new HashMap<String, Boolean>();
+			for (int i = 0; i < serviceTypes.length(); i++) {
+				try {
+					serviceTypeSettings.put(serviceTypes.getJSONObject(i).getString(SERVICE_TYPES_RESP_KEY_NAME), true);
+				} catch (JSONException e) {
+					
+				}
+			}
+		}
 		return serviceTypeSettings;
 	}
 
+	public static JSONObject getServiceTypeByName(String serviceName) {
+		for (int i = 0; i < serviceTypes.length(); i++) {
+			try {
+				if(serviceTypes.getJSONObject(i).getString(SERVICE_TYPES_RESP_KEY_NAME).equalsIgnoreCase(serviceName)){
+					return serviceTypes.getJSONObject(i);
+				}
+			} catch (JSONException e) {
+				
+			}
+		}
+		return null;
+	}
+	
 	public static void setServiceTypeSettings(
 			Map<String, Boolean> serviceTypeSettings) {
 		DataStorage.serviceTypeSettings = serviceTypeSettings;

@@ -80,6 +80,41 @@ public class HttpUrlHitUtils implements Constants{
 		return null;
 	}
 
+	public static String putResponseByHittingUrlWithRequestBody(String request, String requestBody) {
+		try{
+			URL url = new URL(request); 
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();           
+			connection.setDoOutput(true);
+			connection.setDoInput(true);
+			connection.setInstanceFollowRedirects(false); 
+			connection.setRequestMethod("PUT"); 
+			connection.setRequestProperty("Content-Type", "application/json"); 
+			connection.setRequestProperty("charset", "utf-8");
+			connection.setRequestProperty("Content-Length", "" + Integer.toString(requestBody.getBytes().length));
+			connection.setUseCaches (false);
+
+			DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());
+			wr.writeBytes(requestBody);
+			wr.flush();
+			wr.close();
+			
+			InputStream myInputStream = connection.getInputStream();
+	
+			BufferedReader rd = new BufferedReader(new InputStreamReader(myInputStream), 4096);
+			String line;
+			StringBuilder sb = new StringBuilder();
+			while ((line = rd.readLine()) != null) {
+				sb.append(line);
+			}
+			rd.close();
+			connection.disconnect();
+			return sb.toString();
+		} catch (Exception e) {
+			Log.d(LOG_TAG, e.toString());
+		}
+		return null;
+	}
+	
 	public static String postResponseByHittingUrlWithRequestBody(String request, String requestBody) {
 		try{
 			URL url = new URL(request); 
