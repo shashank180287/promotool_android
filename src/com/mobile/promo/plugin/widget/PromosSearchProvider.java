@@ -15,9 +15,15 @@ import com.mobile.promo.plugin.R;
 import com.mobile.promo.plugin.alerts.InternetConnectionAlert;
 import com.mobile.promo.plugin.alerts.LocationSyncAlert;
 import com.mobile.promo.plugin.data.DataStorage;
+import com.mobile.promo.plugin.json.JSONException;
+import com.mobile.promo.plugin.json.JSONObject;
+import com.mobile.promo.plugin.manager.PluginNotificationManager;
+import com.mobile.promo.plugin.manager.WidgetManager;
 import com.mobile.promo.plugin.utils.Constants;
+import com.mobile.promo.plugin.utils.HttpUrlHitUtils;
 import com.mobile.promo.plugin.utils.LocationSyncUtils;
 import com.mobile.promo.plugin.utils.NetworkUtils;
+import com.mobile.promo.plugin.utils.PhoneUtils;
 import com.mobile.promo.plugin.utils.ToolWidgetUtils;
 
 public class PromosSearchProvider extends AppWidgetProvider implements Constants{
@@ -94,38 +100,31 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
 		ComponentName thisWidget = new ComponentName(context,PromosSearchProvider.class);
 
 		int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-		Location userLocation= locationSyncUtils.getUserCurrentLocation(context);
-
+		Location userLocation=locationSyncUtils!=null? locationSyncUtils.getUserCurrentLocation(context): LocationSyncUtils.getInstance(context).getUserCurrentLocation(context);
 		if (userLocation != null && DataStorage.isUserLocationChanged(userLocation)) {
+			Log.w(LOG_TAG, "User location is ["+userLocation.getLatitude()+","+userLocation.getLongitude()+"]");
 			DataStorage.setUserCurrentLocation(userLocation);
 			for (int widgetId : allWidgetIds) {
-				DataStorage.getServiceInfoByLatAndLong(userLocation.getLatitude(), userLocation.getLongitude());
-				if (DataStorage.isLiveData()) {
-					RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-					remoteViews.setImageViewResource(R.id.backgroundImage, R.drawable.old_on);
-					Intent activityIntent = new Intent(context, PromoListActivity.class);
-					activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					activityIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
-					
-					PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, activityIntent,
-							PendingIntent.FLAG_UPDATE_CURRENT);
-					remoteViews.setOnClickPendingIntent(R.id.backgroundImage, pendingIntent);
-					appWidgetManager.updateAppWidget(widgetId, remoteViews);
-
-				} else {
-					 Log.w(LOG_TAG, "Movie list is empty...");
-					 
-					RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-					remoteViews.setImageViewResource(R.id.backgroundImage, R.drawable.old_off);
-
-					// Register an onClickListener
-					Intent clickIntent = new Intent(context, PromoListActivity.class);
-					clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-					clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
-					PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickIntent,
-							PendingIntent.FLAG_UPDATE_CURRENT);
-					remoteViews.setOnClickPendingIntent(R.id.backgroundImage,pendingIntent);
-					appWidgetManager.updateAppWidget(widgetId, remoteViews);
+				String statusTrackerUrl = SERVER_BASE_URL+"/"+ STATUS_TRACKER_URL+"?"+STATUS_TRACKER_REQ_USER_ID+"="+PhoneUtils.getUserTelephoneNumber(context)+
+						"&"+STATUS_TRACKER_REQ_LATITUDE+"="+userLocation.getLatitude()+"&"+STATUS_TRACKER_REQ_LONGITUDE+"="+userLocation.getLongitude();
+				String response = HttpUrlHitUtils.getResponseByHittingUrl(statusTrackerUrl);
+				//DataStorage.getServiceInfoByLatAndLong(userLocation.getLatitude(), userLocation.getLongitude());
+				Log.d(LOG_TAG, "Location request response "+response);
+				String status = "N";
+				JSONObject approvedRequest =null;
+				try{
+					if (response!=null){
+						JSONObject responseObj =  new JSONObject(response);
+						status = responseObj.getString(STATUS_TRACKER_RES_ISSERVICEAVAIL);
+						if(responseObj.has(STATUS_TRACKER_RES_INVSEARCHRESP)){
+							approvedRequest = new JSONObject();
+						}
+					}
+				}catch(JSONException e){
+				}
+				WidgetManager.handleWidgetLayout(context, appWidgetManager, allWidgetIds, status, widgetId);
+				if(approvedRequest!=null){
+					PluginNotificationManager.createNotification(context);
 				}
 			}
 		}

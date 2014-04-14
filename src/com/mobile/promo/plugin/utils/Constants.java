@@ -45,6 +45,12 @@ public interface Constants {
 	public static final String SETTINGS_UPDATE_REQ_BODY_SELECTEDSERVICE = "userSelectedServiceTypes";
 	public static final String SETTINGS_UPDATE_RES_STATUS = "status";
 	public static final String SETTINGS_UPDATE_RES_STATUS_SUCCESS = "SUCCESS";
+	public static final String STATUS_TRACKER_REQ_USER_ID = "id";
+	public static final String STATUS_TRACKER_REQ_LATITUDE = "lat";
+	public static final String STATUS_TRACKER_REQ_LONGITUDE = "lon";
+	public static final String STATUS_TRACKER_RES_ISSERVICEAVAIL = "isServiceAvailable";	
+	public static final String STATUS_TRACKER_RES_SERVTYPERESP = "serviceTypesResponse";	
+	public static final String STATUS_TRACKER_RES_INVSEARCHRESP = "inventorySearchResponse";	
 	
 	public static final String APPLICATION_USER_ID = "1";
 	public static final String USER_VISIT_CODE="VI";

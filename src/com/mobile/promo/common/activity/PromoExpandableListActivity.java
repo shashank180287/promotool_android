@@ -33,7 +33,7 @@ public class PromoExpandableListActivity extends Activity {
 		ArrayList<ExpandListChild> list2 = new ArrayList<ExpandListChild>();
 		ExpandListGroup gru1 = new ExpandListGroup();
 		gru1.setName("Comedy");
-		gru1.setImageResourse(R.drawable.apparel_total);
+	//	gru1.setImageResourse(R.drawable.apparel_total);
 		ExpandListChild ch1_1 = new ExpandListChild();
 		ch1_1.setName("A movie");
 		ch1_1.setTag(null);
@@ -51,7 +51,7 @@ public class PromoExpandableListActivity extends Activity {
 
 		ExpandListGroup gru2 = new ExpandListGroup();
 		gru2.setName("Action");
-		gru2.setImageResourse(R.drawable.grocery_total);
+	//	gru2.setImageResourse(R.drawable.grocery_total);
 		ExpandListChild ch2_1 = new ExpandListChild();
 		ch2_1.setName("A movie");
 		ch2_1.setTag(null);

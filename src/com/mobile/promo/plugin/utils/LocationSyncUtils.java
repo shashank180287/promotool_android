@@ -16,6 +16,8 @@ public class LocationSyncUtils implements Constants, LocationListener {
 	private static Location userLocation;
 	private Context context;
 	private static LocationManager locManager;
+	private static LocationSyncUtils locationSyncUtils;
+	
 	
 	private LocationSyncUtils(){
 		
@@ -23,7 +25,9 @@ public class LocationSyncUtils implements Constants, LocationListener {
 	
 	public static LocationSyncUtils getInstance(Context context){
 		locManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-		LocationSyncUtils locationSyncUtils =new LocationSyncUtils();
+		if(locationSyncUtils==null){
+			locationSyncUtils =new LocationSyncUtils();
+		}
 		locationSyncUtils.setContext(context);
 		locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationSyncUtils);
 		return locationSyncUtils;
