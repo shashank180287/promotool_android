@@ -1,6 +1,5 @@
 package com.mobile.promo.plugin.widget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -8,13 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.util.Log;
-import android.widget.RemoteViews;
 
-import com.mobile.promo.common.activity.PromoListActivity;
-import com.mobile.promo.plugin.R;
+import com.mobile.promo.common.activity.PromoCommonListActivity;
 import com.mobile.promo.plugin.alerts.InternetConnectionAlert;
 import com.mobile.promo.plugin.alerts.LocationSyncAlert;
 import com.mobile.promo.plugin.data.DataStorage;
+import com.mobile.promo.plugin.json.JSONArray;
 import com.mobile.promo.plugin.json.JSONException;
 import com.mobile.promo.plugin.json.JSONObject;
 import com.mobile.promo.plugin.manager.PluginNotificationManager;
@@ -111,20 +109,26 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
 				//DataStorage.getServiceInfoByLatAndLong(userLocation.getLatitude(), userLocation.getLongitude());
 				Log.d(LOG_TAG, "Location request response "+response);
 				String status = "N";
-				JSONObject approvedRequest =null;
+				JSONArray approvedRequests =null;
 				try{
 					if (response!=null){
 						JSONObject responseObj =  new JSONObject(response);
 						status = responseObj.getString(STATUS_TRACKER_RES_ISSERVICEAVAIL);
 						if(responseObj.has(STATUS_TRACKER_RES_INVSEARCHRESP)){
-							approvedRequest = new JSONObject();
+							approvedRequests = responseObj.getJSONObject(STATUS_TRACKER_RES_INVSEARCHRESP).getJSONArray(STATUS_TRACKER_RES_INVSEARCHITEMS);
 						}
 					}
+
+					WidgetManager.handleWidgetLayout(context, appWidgetManager, allWidgetIds, status, widgetId);
+					if(approvedRequests!=null){
+						String contentTitle = approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_BRAND);
+						String contentText = "Was Rs."+approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_PRICE)+" But Now @ Rs."+approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_EFFECTIVE_PRICE);
+						DataStorage.setItemsList(approvedRequests);
+						Intent itemListIntent = new Intent(context, PromoCommonListActivity.class);
+						PluginNotificationManager.createNotification(context, contentTitle, contentText, itemListIntent);
+					}
 				}catch(JSONException e){
-				}
-				WidgetManager.handleWidgetLayout(context, appWidgetManager, allWidgetIds, status, widgetId);
-				if(approvedRequest!=null){
-					PluginNotificationManager.createNotification(context);
+					Log.e(LOG_TAG, "Error while getting error "+e.getMessage());
 				}
 			}
 		}
