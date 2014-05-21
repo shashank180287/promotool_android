@@ -119,7 +119,7 @@ public class PromosSearchProvider extends AppWidgetProvider implements Constants
 						}
 					}
 
-					WidgetManager.handleWidgetLayout(context, appWidgetManager, allWidgetIds, status, widgetId);
+					WidgetManager.handleWidgetLayout(context, appWidgetManager, allWidgetIds, status, widgetId, new double[]{ userLocation.getLatitude(), userLocation.getLongitude()});
 					if(approvedRequests!=null){
 						String contentTitle = approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_BRAND);
 						String contentText = "Was Rs."+approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_PRICE)+" But Now @ Rs."+approvedRequests.getJSONObject(0).getString(STATUS_TRACKER_RES_REQ_EFFECTIVE_PRICE);

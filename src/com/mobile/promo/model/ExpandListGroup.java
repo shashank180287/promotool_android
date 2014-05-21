@@ -20,6 +20,10 @@ public class ExpandListGroup {
 	public void setItems(ArrayList<ExpandListChild> Items) {
 		this.Items = Items;
 	}
+	public void addItem(ExpandListChild item) {
+		if(this.Items == null) Items = new ArrayList<ExpandListChild>();
+		this.Items.add(item);
+	}
 	public int getImageResourse() {
 		return imageResourse;
 	}

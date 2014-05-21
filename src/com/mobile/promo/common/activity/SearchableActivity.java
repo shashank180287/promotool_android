@@ -26,30 +26,30 @@ public class SearchableActivity extends ListActivity implements Constants{
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    Intent intent = getIntent();
-	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-	    	String query = intent.getStringExtra(SearchManager.QUERY);
-	    	Log.d(LOG_TAG, "Query is: "+query);
-	    	JSONArray movieListAsJsonArray = DataStorage.getMovieListAsJsonArray();
-	    	List<JSONObject> movieNameList=new ArrayList<JSONObject>();
-	    	for (int i=0; i<movieListAsJsonArray.length();i++) {
-	    		try{
-	    			JSONObject movieObj = movieListAsJsonArray.getJSONObject(i);
-	    			if(movieObj!=null && movieObj.getString("name").toLowerCase().contains(query.toLowerCase()))
-	    				movieNameList.add(movieObj);
-				}catch (JSONException e) {
-				}
-	    	}
+//	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//	    	String query = intent.getStringExtra(SearchManager.QUERY);
+//	    	Log.d(LOG_TAG, "Query is: "+query);
+//	    	JSONArray movieListAsJsonArray = DataStorage.getMovieListAsJsonArray();
+//	    	List<JSONObject> movieNameList=new ArrayList<JSONObject>();
+//	    	for (int i=0; i<movieListAsJsonArray.length();i++) {
+//	    		try{
+//	    			JSONObject movieObj = movieListAsJsonArray.getJSONObject(i);
+//	    			if(movieObj!=null && movieObj.getString("name").toLowerCase().contains(query.toLowerCase()))
+//	    				movieNameList.add(movieObj);
+//				}catch (JSONException e) {
+//				}
+//	    	}
 	    	setContentView(R.layout.list_layout);
 //	    	setListAdapter(new ArrayAdapter(this,android.R.layout.simple_list_item_1, movieNameList));
 //	    	setListAdapter(new PromosListAdapter(this,movieNameList));
-	    	setListAdapter(new PromosListAdapter(this, movieListAsJsonArray, true));
-	    }
+//	    	setListAdapter(new PromosListAdapter(this, movieListAsJsonArray, true));
+//	    }
 	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-       	DataStorage.setSelectedMovieIndex(position);
+//      	DataStorage.setSelectedMovieIndex(position);
         Intent movieInfoIntent = new Intent(SearchableActivity.this, PromoInfosActivity.class);
         SearchableActivity.this.startActivity(movieInfoIntent);
 	}

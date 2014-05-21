@@ -33,13 +33,11 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 		groups.get(index).setItems(ch);
 	}
 	public Object getChild(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
 		ArrayList<ExpandListChild> chList = groups.get(groupPosition).getItems();
 		return chList.get(childPosition);
 	}
 
 	public long getChildId(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
 		return childPosition;
 	}
 
@@ -50,33 +48,27 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 			LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = infalInflater.inflate(R.layout.expandlist_child_item, null);
 		}
-		TextView tv = (TextView) view.findViewById(R.id.tvChild);
-		tv.setText(child.getName().toString());
-		tv.setTag(child.getTag());
-		// TODO Auto-generated method stub
+        TextView mainHeading = (TextView)view.findViewById(R.id.main_head);
+        TextView otherInfo = (TextView)view.findViewById(R.id.other_info);
+        mainHeading.setText(child.getName());
+		otherInfo.setText(child.getTag()); 
 		return view;
 	}
 
 	public int getChildrenCount(int groupPosition) {
-		// TODO Auto-generated method stub
 		ArrayList<ExpandListChild> chList = groups.get(groupPosition).getItems();
-
 		return chList.size();
-
 	}
 
 	public Object getGroup(int groupPosition) {
-		// TODO Auto-generated method stub
 		return groups.get(groupPosition);
 	}
 
 	public int getGroupCount() {
-		// TODO Auto-generated method stub
 		return groups.size();
 	}
 
 	public long getGroupId(int groupPosition) {
-		// TODO Auto-generated method stub
 		return groupPosition;
 	}
 
@@ -91,17 +83,14 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 		ImageView image = (ImageView) view.findViewById(R.id.image1);
 		image.setImageResource(group.getImageResourse());
 		tv.setText(group.getName());
-		// TODO Auto-generated method stub
 		return view;
 	}
 
 	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	public boolean isChildSelectable(int arg0, int arg1) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

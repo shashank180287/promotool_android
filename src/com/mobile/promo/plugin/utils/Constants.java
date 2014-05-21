@@ -56,7 +56,14 @@ public interface Constants {
 	public static final String STATUS_TRACKER_RES_REQ_EFFECTIVE_PRICE = "effectivePrice";	
 	public static final String STATUS_TRACKER_RES_REQ_PRICE = "price";	
 	public static final String STATUS_TRACKER_RES_INVSEARCHITEMS="inventorySearchItems";
-	
+	public static final String SERVICE_LIST_REQ_PARAM_ID="Id";
+	public static final String SERVICE_LIST_REQ_PARAM_LATITUDE="lat";
+	public static final String SERVICE_LIST_REQ_PARAM_LONGITUDE="lon";
+	public static final String SERVICE_LIST_RESP_MESSAGE="message";
+	public static final String SERVICE_LIST_RESP_TIME="time";
+	public static final String SERVICE_LIST_RESP_NAME="name";
+	public static final String SERVICE_LIST_RESP_TYPE="type";
+
 	public static final String APPLICATION_USER_ID = "1";
 	public static final String USER_VISIT_CODE="VI";
 	public static final String USER_TAG_CODE="TA";

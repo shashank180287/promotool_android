@@ -5,6 +5,14 @@ public class ExpandListChild {
 	private String Name;
 	private String Tag;
 	
+	public ExpandListChild() {
+	}
+	
+	public ExpandListChild(String name, String tag) {
+		super();
+		Name = name;
+		Tag = tag;
+	}
 	public String getName() {
 		return Name;
 	}

@@ -13,7 +13,10 @@ import com.mobile.promo.plugin.R;
 
 public class WidgetManager {
 
-	public static void handleWidgetLayout(Context context, AppWidgetManager appWidgetManager, int[] allWidgetIds, String serviceStatus, int widgetId) {
+	public static final String SERVICE_STATUS_PARAM = "serviceStatus";	
+	public static final String USER_LOCATION_PARAM = "userLocation";	
+	
+	public static void handleWidgetLayout(Context context, AppWidgetManager appWidgetManager, int[] allWidgetIds, String serviceStatus, int widgetId, double[] userLocation) {
 		if ("Y".equalsIgnoreCase(serviceStatus)) {
 			RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
 					R.layout.widget_layout);
@@ -23,7 +26,10 @@ public class WidgetManager {
 			activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			activityIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
 					allWidgetIds);
-
+			activityIntent.putExtra(WidgetManager.SERVICE_STATUS_PARAM,
+					serviceStatus);
+			activityIntent.putExtra(WidgetManager.USER_LOCATION_PARAM,
+					userLocation);
 			PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
 					activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 			remoteViews.setOnClickPendingIntent(R.id.backgroundImage,
@@ -43,6 +49,8 @@ public class WidgetManager {
 		clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 		clickIntent
 				.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allWidgetIds);
+		clickIntent.putExtra(WidgetManager.SERVICE_STATUS_PARAM,
+				serviceStatus);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
 				clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		remoteViews
